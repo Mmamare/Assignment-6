@@ -1,0 +1,24 @@
+(1) The time command measures the execution time of the word-search
+program. Searching data/small.txt for "the" took 0.006 seconds of
+real time, 0.001 seconds of user CPU time, and 0.004 seconds of
+system CPU time. The real time represents the total elapsed time,
+while user and sys represent CPU time spent executing application
+code and operating system operations, respectively. The program
+successfully found 2 occurrences of "the".
+
+(2) A data race can occur when multiple threads update a shared
+counter or array simultaneously. I avoided data races by giving
+each worker its own count and instances array. Each thread processes
+a separate file chunk, and the main thread combines the results
+after pthread_join(). Therefore, no mutex is required.
+
+(3) OpenMP simplifies parallel programming by automatically managing
+threads using compiler directives such as #pragma omp parallel for.
+Unlike POSIX pthreads, OpenMP does not require manually creating
+threads with pthread_create() or waiting with pthread_join().
+
+Both implementations divide the input file into separate chunks
+and give each worker its own result storage to avoid data races.
+OpenMP requires less thread-management code, while pthreads provide
+more direct control over thread creation, synchronization, and
+execution.
